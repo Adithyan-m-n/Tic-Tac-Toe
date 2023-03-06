@@ -4,7 +4,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const resetButton = document.querySelector('#reset');
     const announcer = document.querySelector('.announcer');
     const undo = document.querySelector('#undo');
-
     let board = ['', '', '', '', '', '', '', '', ''];
     let currentPlayer = 'X';
     let isGameActive = true;
@@ -15,6 +14,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const TIE = 'TIE';
     let playerxcount=0;
     let playerocount=0;
+    let t=[];
+    let nottie=true;
 
 
     const winningConditions = [
@@ -39,6 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 continue;
             }
             if (a === b && b === c) {
+                t=winCondition;
                 roundWon = true;
                 break;
             }
@@ -70,7 +72,15 @@ window.addEventListener('DOMContentLoaded', () => {
                 announcer.innerText = 'Tie';
                 document.getElementById("dis").style.display="none";
                 isGameActive = false;
+                nottie=false;
         }
+        
+        if(nottie==true){
+            for(let i=0;i<t.length;i++){
+                tiles[t[i]].style.backgroundColor="yellow";
+            }
+        }
+
         document.getElementsByClassName("score")[0].innerHTML= `<div class="score-player playerX">Player X : <span class="score-count">${playerxcount}</span></div> <div class="score-player playerO">Player O : <span class="score-count">${playerocount}</span></div>`;
         document.getElementById("undo").style.display = "none";
         announcer.classList.remove('hide');
@@ -136,12 +146,15 @@ window.addEventListener('DOMContentLoaded', () => {
             tile.classList.remove('playerX');
             tile.classList.remove('playerO');
         });
+        for(let i=0;i<t.length;i++){
+            tiles[t[i]].style.backgroundColor="white";
+        }
         l=[];
         moves=[];
+        t=[];
         
        
     }
-
     undo.addEventListener('click', undoMove);
     function undoMove(){
         if(moves.length>0){
@@ -155,9 +168,5 @@ window.addEventListener('DOMContentLoaded', () => {
             document.getElementById("undo").style.display = "none";
 
         }
-    
-
-
-    
     
 });

@@ -4,7 +4,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const resetButton = document.querySelector('#reset');
     const announcer = document.querySelector('.announcer');
     const undo = document.querySelector('#undo');
-
     let board = ['', '', '', '', '', '', '', '', ''];
     let currentPlayer = 'X';
     let isGameActive = true;
@@ -15,6 +14,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const TIE = 'TIE';
     let playerxcount=0;
     let playerocount=0;
+    let t=[];
+    let nottie=true;
 
 
     const winningConditions = [
@@ -39,6 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 continue;
             }
             if (a === b && b === c) {
+                t=winCondition;
                 roundWon = true;
                 break;
             }
@@ -56,20 +58,29 @@ window.addEventListener('DOMContentLoaded', () => {
     function announce(type) {
         switch(type){
             case PLAYERO_WON:
+                document.getElementById("dis").style.display="none";
                 announcer.innerHTML = 'Player <span class="playerO">O</span> Won';
                 playerocount++;
-                document.getElementsByClassName("display")[0].textContent="  ";
+
                 break;
             case PLAYERX_WON:
                 announcer.innerHTML = 'Player <span class="playerX">X</span> Won';
                 playerxcount++;
-                document.getElementsByClassName("display")[0].textContent="  ";
+                document.getElementById("dis").style.display="none";
                 break;
             case TIE:
                 announcer.innerText = 'Tie';
-                document.getElementsByClassName("display")[0].textContent="  ";
+                document.getElementById("dis").style.display="none";
                 isGameActive = false;
+                nottie=false;
         }
+        
+        if(nottie==true){
+            for(let i=0;i<t.length;i++){
+                tiles[t[i]].style.backgroundColor="yellow";
+            }
+        }
+
         document.getElementsByClassName("score")[0].innerHTML= `<div class="score-player playerX">Player X : <span class="score-count">${playerxcount}</span></div> <div class="score-player playerO">Player O : <span class="score-count">${playerocount}</span></div>`;
         document.getElementById("undo").style.display = "none";
         announcer.classList.remove('hide');
@@ -122,6 +133,7 @@ window.addEventListener('DOMContentLoaded', () => {
     resetButton.addEventListener('click', resetBoard);
     function resetBoard() {
         board = ['', '', '', '', '', '', '', '', ''];
+        document.getElementById("dis").style.display="block";
         isGameActive = true;
         announcer.classList.add('hide');
 
@@ -134,10 +146,16 @@ window.addEventListener('DOMContentLoaded', () => {
             tile.classList.remove('playerX');
             tile.classList.remove('playerO');
         });
+        for(let i=0;i<t.length;i++){
+            tiles[t[i]].style.backgroundColor="white";
+        }
         l=[];
         moves=[];
-        document.getElementsByClassName("display")[0].innerHTML="Player <span class=\"display-player playerX\">X</span>'s turn";
+        t=[];
+        
+       
     }
+
 
     undo.addEventListener('click', undoMove);
     function undoMove(){
@@ -152,9 +170,5 @@ window.addEventListener('DOMContentLoaded', () => {
             document.getElementById("undo").style.display = "none";
 
         }
-    
-
-
-    
     
 });
