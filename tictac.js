@@ -4,14 +4,17 @@ window.addEventListener('DOMContentLoaded', () => {
     const resetButton = document.querySelector('#reset');
     const announcer = document.querySelector('.announcer');
     const undo = document.querySelector('#undo');
+
     let board = ['', '', '', '', '', '', '', '', ''];
     let currentPlayer = 'X';
     let isGameActive = true;
     let moves=[];
-    let count=0;
+    let l=[];
     const PLAYERX_WON = 'PLAYERX_WON';
     const PLAYERO_WON = 'PLAYERO_WON';
     const TIE = 'TIE';
+    let playerxcount=0;
+    let playerocount=0;
 
 
     const winningConditions = [
@@ -53,14 +56,23 @@ window.addEventListener('DOMContentLoaded', () => {
     function announce(type) {
         switch(type){
             case PLAYERO_WON:
+                document.getElementById("dis").style.display="none";
                 announcer.innerHTML = 'Player <span class="playerO">O</span> Won';
+                playerocount++;
+
                 break;
             case PLAYERX_WON:
                 announcer.innerHTML = 'Player <span class="playerX">X</span> Won';
+                playerxcount++;
+                document.getElementById("dis").style.display="none";
                 break;
             case TIE:
                 announcer.innerText = 'Tie';
+                document.getElementById("dis").style.display="none";
+                isGameActive = false;
         }
+        document.getElementsByClassName("score")[0].innerHTML= `<div class="score-player playerX">Player X : <span class="score-count">${playerxcount}</span></div> <div class="score-player playerO">Player O : <span class="score-count">${playerocount}</span></div>`;
+        document.getElementById("undo").style.display = "none";
         announcer.classList.remove('hide');
     }
 
@@ -85,8 +97,13 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function userAction(tile, index) {
-        count++;
-        if(count%2===0){document.getElementById("undo").style.display = "block";}
+        l.push(currentPlayer);
+        if(l[l.length-1]!==l[l.length-2]){
+            document.getElementById("undo").style.display = "block";
+        
+        }
+        if(!isGameActive)
+        document.getElementById("undo").style.display = "none";
 
         if(isValidAction(tile) && isGameActive) {
             moves.push(index);
@@ -95,8 +112,6 @@ window.addEventListener('DOMContentLoaded', () => {
             updateBoard(index);
             handleResultValidation();
             changePlayer();
-   
-            
   
         }
     }
@@ -108,6 +123,7 @@ window.addEventListener('DOMContentLoaded', () => {
     resetButton.addEventListener('click', resetBoard);
     function resetBoard() {
         board = ['', '', '', '', '', '', '', '', ''];
+        document.getElementById("dis").style.display="block";
         isGameActive = true;
         announcer.classList.add('hide');
 
@@ -120,6 +136,10 @@ window.addEventListener('DOMContentLoaded', () => {
             tile.classList.remove('playerX');
             tile.classList.remove('playerO');
         });
+        l=[];
+        moves=[];
+        
+       
     }
 
     undo.addEventListener('click', undoMove);

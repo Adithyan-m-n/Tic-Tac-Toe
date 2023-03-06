@@ -1,24 +1,27 @@
 * {
+    background-color:white;
     padding: 0;
     margin: 0;
     font-family: 'Tilt Prism', cursive;
 }
 
 .background {
-    background-color: #12181B;
+    background-color:white;
     height: 100vh;
     padding-top: 1px;
 }
 
 .title {
-    color: white;
+    text-decoration: underline;
+    color: rgb(0, 0, 0);
     text-align: center;
-    font-size: 40px;
-    margin-top: 10%;
+    font-size: 30px;
+    margin-top: 1em;
 }
 
 .display {
-    color: white;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
     font-size: 25px;
     text-align: center;
     margin-top: 1em;
@@ -26,6 +29,7 @@
 }
 
 .hide {
+    background-color: #000000;
     display: none;
 }
 
@@ -36,6 +40,9 @@
     grid-template-rows: 33% 33% 33%;
     max-width: 300px;
     border: none;
+    grid-column-gap: 2px; /* remove gap between tiles */
+    grid-row-gap: 2px; /* add gap vertically between tiles */
+    background-color: black; /* set gap color to black */
 
 }
 
@@ -47,11 +54,8 @@
     align-items: center;
     font-size: 50px;
     cursor: pointer;
-    box-shadow: 
-        0 0 0 1px white, /* top border */
-        0 0 0 1px white, /* right border */
-        0 0 0 1px white, /* bottom border */
-        0 0 0 1px white; /* left border */
+    font-weight: bold;
+
 }
 
 
@@ -67,15 +71,16 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
     margin-top: 1em;
 }
 
 .controls button {
-    color: white;
+    font-weight: bold;
+    color: rgb(255, 239, 239);
     padding: 8px;
-    border-radius: 8px;
-    border: none;
+    border-radius: 6px;
+    border: 1px solid #000000;
+    align-content: center;
     font-size: 20px;
     margin-left: 1em;
     cursor: pointer;
@@ -84,7 +89,17 @@
 .restart {
     background-color: #498AFB;
 }
-
+.score {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 1em;
+    font-weight: bold;
+}
+.score-player{
+    padding: 10px;
+    font-size: 20px;
+}
 #reset {
     background-color: #FF3860;
 }

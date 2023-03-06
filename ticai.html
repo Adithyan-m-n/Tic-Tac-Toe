@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tictac.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet">
+    <script src="tictac2.js"></script>
+    <title>Tic-Tac-Toe</title>
+</head>
+<body>
+    <main class="background">
+        <div class="title">
+            <h1>Tic Tac Toe</h1>
+        </div>
+        <div class="score">
+            <div class="score-player playerX">Player X : <span class="score-count">0</span></div>
+            <div class="score-player playerO">Player O : <span class="score-count">0</span></div>
+        </div>
+        <div class="display">
+            Player <span class="display-player playerX">X</span>'s turn
+        </div>
+        <div class="container">
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+        </div>
+        <div class="display announcer hide"></div>
+        <div class="controls">
+            <button id="reset">Reset</button>
+            <button class="bi bi-arrow-counterclockwise" id="undo"></button>
+
+        </div>
+
+    </main>
+</body>
+</html>
