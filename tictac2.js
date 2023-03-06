@@ -1,4 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
+    
     const tiles = Array.from(document.querySelectorAll('.tile'));
     const playerDisplay = document.querySelector('.display-player');
     const resetButton = document.querySelector('#reset');
@@ -13,9 +14,12 @@ window.addEventListener('DOMContentLoaded', () => {
     const PLAYERO_WON = 'PLAYERO_WON';
     const TIE = 'TIE';
     let playerxcount=0;
-    let playerocount=0;
+    let AIcount=0;
     let t=[];
     let nottie=true;
+    let postions=[0,1,2,3,4,5,6,7,8];
+    let markedPositions=[];
+    let freePositions=[];
 
 
     const winningConditions = [
@@ -60,7 +64,7 @@ window.addEventListener('DOMContentLoaded', () => {
             case PLAYERO_WON:
                 document.getElementById("dis").style.display="none";
                 announcer.innerHTML = 'Player <span class="playerO">O</span> Won';
-                playerocount++;
+                AIcount++;
 
                 break;
             case PLAYERX_WON:
@@ -81,7 +85,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        document.getElementsByClassName("score")[0].innerHTML= `<div class="score-player playerX">Player X : <span class="score-count">${playerxcount}</span></div> <div class="score-player playerO">Player O : <span class="score-count">${playerocount}</span></div>`;
+        document.getElementsByClassName("score")[0].innerHTML= `<div class="score-player playerX">Player X : <span class="score-count">${playerxcount}</span></div> <div class="score-player playerO">AI : <span class="score-count">${AIcount}</span></div>`;
         document.getElementById("undo").style.display = "none";
         announcer.classList.remove('hide');
     }
@@ -108,23 +112,30 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function userAction(tile, index) {
         l.push(currentPlayer);
-        if(l[l.length-1]!==l[l.length-2]){
+        if(currentPlayer=='X')
             document.getElementById("undo").style.display = "block";
         
-        }
         if(!isGameActive)
         document.getElementById("undo").style.display = "none";
 
         if(isValidAction(tile) && isGameActive) {
             moves.push(index);
+            if(currentPlayer === 'X'){markedPositions.push(index);}
+            freePositions=postions.filter(number => !moves.includes(number));
             tile.innerText = currentPlayer;
             tile.classList.add(`player${currentPlayer}`);
             updateBoard(index);
             handleResultValidation();
             changePlayer();
+            if(currentPlayer === 'O' && isGameActive){
+                pos=getNextMove(freePositions, markedPositions);
+                userAction(tiles[pos], pos);
+            }
+
   
         }
     }
+    
 
     tiles.forEach((tile, index) => {
         tile.addEventListener('click', () => userAction(tile, index));
@@ -152,23 +163,120 @@ window.addEventListener('DOMContentLoaded', () => {
         l=[];
         moves=[];
         t=[];
-        
-       
+        freePositions=[];
+        markedPositions=[];
     }
 
 
     undo.addEventListener('click', undoMove);
     function undoMove(){
         if(moves.length>0){
+            for(let i=0;i<2;i++){
                 let lastMove = moves.pop();
                 tiles[lastMove].innerText = '';
                 tiles[lastMove].classList.remove('playerX');
                 tiles[lastMove].classList.remove('playerO');
                 board[lastMove] = '';
-                changePlayer();
+            }
+
+                if(currentPlayer === 'X'){markedPositions.pop();}
+                freePositions=postions.filter(number => !moves.includes(number));
             }
             document.getElementById("undo").style.display = "none";
 
+
         }
+
+        function getNextMove(freePositions, markedPositions) {
+            // Check if there's a winning move for the current player
+            for (let i = 0; i < freePositions.length; i++) {
+              const position = freePositions[i];
+              const newMarkedPositions = [...markedPositions, position];
+              if (isWinningMove(newMarkedPositions)) {
+                return position;
+              }
+            }
+          
+            // Check if there's a blocking move for the opposite player
+            for (let i = 0; i < freePositions.length; i++) {
+              const position = freePositions[i];
+              const newMarkedPositions = [...markedPositions, position];
+              if (isWinningMove(newMarkedPositions, true)) {
+                return position;
+              }
+            }
+          
+            // Otherwise, make a random move
+            return freePositions[Math.floor(Math.random() * freePositions.length)];
+          }
+          
+          function isWinningMove(markedPositions, opposite = false) {
+            const playerMark = opposite ? 'O' : 'X';
+          
+            // Check rows
+            for (let i = 0; i < 3; i++) {
+              if (
+                markedPositions.includes(i * 3) &&
+                markedPositions.includes(i * 3 + 1) &&
+                markedPositions.includes(i * 3 + 2)
+              ) {
+                if (
+                  opposite
+                    ? !markedPositions.includes(playerMark)
+                    : markedPositions.includes(playerMark)
+                ) {
+                  return true;
+                }
+              }
+            }
+          
+            // Check columns
+            for (let i = 0; i < 3; i++) {
+              if (
+                markedPositions.includes(i) &&
+                markedPositions.includes(i + 3) &&
+                markedPositions.includes(i + 6)
+              ) {
+                if (
+                  opposite
+                    ? !markedPositions.includes(playerMark)
+                    : markedPositions.includes(playerMark)
+                ) {
+                  return true;
+                }
+              }
+            }
+          
+            // Check diagonals
+            if (
+              markedPositions.includes(0) &&
+              markedPositions.includes(4) &&
+              markedPositions.includes(8)
+            ) {
+              if (
+                opposite
+                  ? !markedPositions.includes(playerMark)
+                  : markedPositions.includes(playerMark)
+              ) {
+                return true;
+              }
+            }
+            if (
+              markedPositions.includes(2) &&
+              markedPositions.includes(4) &&
+              markedPositions.includes(6)
+            ) {
+              if (
+                opposite
+                  ? !markedPositions.includes(playerMark)
+                  : markedPositions.includes(playerMark)
+              ) {
+                return true;
+              }
+            }
+          
+            return false;
+          }
+          
     
 });
