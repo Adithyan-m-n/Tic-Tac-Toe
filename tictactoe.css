@@ -1,0 +1,111 @@
+* {
+    background-color:white;
+    padding: 0;
+    margin: 0;
+    font-family: 'Tilt Prism', cursive;
+}
+
+.background {
+    background-color:white;
+    height: 100vh;
+    padding-top: 1px;
+}
+
+.title {
+    text-decoration: underline;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-size: 30px;
+    margin-top: 1em;
+}
+
+.display {
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.hide {
+    background-color: #000000;
+    display: none;
+}
+
+.container {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 33% 33% 33%;
+    max-width: 300px;
+    border: none;
+    grid-column-gap: 2px; /* remove gap between tiles */
+    grid-row-gap: 2px; /* add gap vertically between tiles */
+    background-color: black; /* set gap color to black */
+
+}
+
+.tile {
+    min-width: 100px;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    cursor: pointer;
+    font-weight: bold;
+
+}
+
+
+.playerX {
+    color: #09C372;
+}
+
+.playerO {
+    color: #498AFB;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.controls button {
+    font-weight: bold;
+    color: rgb(255, 239, 239);
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #000000;
+    align-content: center;
+    font-size: 20px;
+    margin-left: 1em;
+    cursor: pointer;
+}
+
+.restart {
+    background-color: #498AFB;
+}
+.score {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 1em;
+    font-weight: bold;
+}
+.score-player{
+    padding: 10px;
+    font-size: 20px;
+}
+#reset {
+    background-color: #FF3860;
+}
+
+#undo {
+    display: none;
+    background-color: #09C372;
+
+}
