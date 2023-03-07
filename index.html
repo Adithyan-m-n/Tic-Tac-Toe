@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
@@ -10,18 +9,24 @@
     <title>Tic-Tac-Toe</title>
     <style>
         body {
-            background-color: #cfaeae50;
+            background-image: url(https://wallpapercave.com/wp/wp9315335.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            height: 100vh;
         }
-        #title {
+        #page-title {
             font-family: 'Tilt Prism', sans-serif;
-            font-size: 3rem;
+            font-size: 60px;
             text-align: center;
-            margin-top: 2rem;
+            margin-top: 10px;
             background-color: #b7ccb7c7;
             color: rgb(33, 52, 46);
-            padding: 1rem;
-            font-style: oblique;
+            padding: 10px;
             font-weight: bold;
+            border-radius: 20px;
         }
         .card2-img-top {
             width: 100%;
@@ -30,14 +35,26 @@
         }
         .card2-text{
             font-family: 'Joti One', cursive;
-            color: rgb(37, 101, 156);
+            font-style: oblique;
+            color: rgb(5, 50, 71);
             font-size: 20px;
             text-align: center;
+            font-weight: bold;
+            
             }
+          .card-body{
+            background-color: rgba(39, 218, 231, 0.322);
+          }
+          .card{
+            background-color: rgba(39, 218, 231, 0.322);
+            border-radius: 20px;
+            margin-bottom: 10px;
+          }
+
 
     </style>
     <body>
-        <h1 id="title">Tic-Tac-Toe</h1>
+        <h1 id="page-title">Tic-Tac-Toe</h1>
         <div class="container">
             <div class="row d-flex justify-content-center">
               <div class="col-md-4">
@@ -53,7 +70,7 @@
               <div class="col-md-4">
                 <a href="https://adithyan-m-n.github.io/Tic-Tac-Toe/">
                   <div class="card">
-                    <img src="https://cdn4.vectorstock.com/i/1000x1000/39/53/neon-game-controllers-or-joysticks-vector-37693953.jpg" class="card2-img-top" alt="...">
+                    <img src="https://t4.ftcdn.net/jpg/04/26/94/59/360_F_426945920_NRJZ1MoNilIYyRsV0ynhI5yVvWL7St4g.jpg" class="card2-img-top" alt="...">
                     <div class="card-body">
                       <p class="card2-text">Double Player</p>
                     </div>
@@ -61,6 +78,6 @@
                 </a>
               </div>
           </div>
-
+        </div>
     </body>
 </html>
