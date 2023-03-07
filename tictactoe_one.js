@@ -64,12 +64,12 @@ window.addEventListener('DOMContentLoaded', () => {
         switch(type){
             case PLAYERO_WON:
                 document.getElementById("dis").style.display="none";
-                announcer.innerHTML = 'Player <span class="playerO">O</span> Won';
+                announcer.innerHTML = '<span class="playerO">AI</span> Won';
                 AIcount++;
 
                 break;
             case PLAYERX_WON:
-                announcer.innerHTML = 'Player <span class="playerX">X</span> Won';
+                announcer.innerHTML = '<span class="playerX">You</span> Won';
                 playerxcount++;
                 document.getElementById("dis").style.display="none";
                 break;
@@ -86,7 +86,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        document.getElementsByClassName("score")[0].innerHTML= `<div class="score-player playerX">Player X : <span class="score-count">${playerxcount}</span></div> <div class="score-player playerO">AI : <span class="score-count">${AIcount}</span></div>`;
+        document.getElementsByClassName("score")[0].innerHTML= `<div class="score-player playerX">You : <span class="score-count">${playerxcount}</span></div> <div class="score-player playerO">AI : <span class="score-count">${AIcount}</span></div>`;
         document.getElementById("undo").style.display = "none";
         announcer.classList.remove('hide');
     }
@@ -104,10 +104,9 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     
     function changePlayer() {
-
         playerDisplay.classList.remove(`player${currentPlayer}`);
         currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-        playerDisplay.innerText = currentPlayer;
+        playerDisplay.innerText = "Your";
         playerDisplay.classList.add(`player${currentPlayer}`);
     }
 
