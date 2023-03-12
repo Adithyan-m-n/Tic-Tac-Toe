@@ -204,7 +204,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
   
-            // Check if there's a winning move for the AI player
+            
             for (let i = 0; i < freePositions.length; i++) {
               const position = freePositions[i];
               const newAI_markedpositions = [...AI_markedpositions, position];
@@ -213,7 +213,7 @@ window.addEventListener('DOMContentLoaded', () => {
               }
             }
           
-            // Check if there's a blocking move for the opposite player
+            
             for (let i = 0; i < freePositions.length; i++) {
               const position = freePositions[i];
               const newX_markedpositions = [...X_markedpositions, position];
@@ -222,7 +222,7 @@ window.addEventListener('DOMContentLoaded', () => {
               }
             }
           
-            // Otherwise, make a random move
+            
             return freePositions[Math.floor(Math.random() * freePositions.length)];
           }
           

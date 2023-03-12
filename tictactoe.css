@@ -56,9 +56,9 @@
     grid-template-rows: 33% 33% 33%;
     max-width: 300px;
     border: none;
-    grid-column-gap: 2px; /* remove gap between tiles */
-    grid-row-gap: 2px; /* add gap vertically between tiles */
-    background-color: black; /* set gap color to black */
+    grid-column-gap: 2px;
+    grid-row-gap: 2px;
+    background-color: black;
 
 }
 
